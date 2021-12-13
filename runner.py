@@ -50,7 +50,15 @@ class Users(UserMixin, db.Model):
 # Login
 @app.route("/", methods=["GET", "POST"])
 def login():
-    return render_template('login.html')
+    if request.method == "POST":
+        data = request.get_json()
+        user = Users.query.filter_by(user_name=data['user_name']).first()
+        if user is None or not user.check_password(data['password']):
+            return (url_for('login'))[1:]
+        login_user(user)
+        return url_for('home.html')
+    else:
+        return render_template('login.html')
 
 
 # Logout
