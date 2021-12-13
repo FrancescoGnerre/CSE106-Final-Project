@@ -85,3 +85,7 @@ function logIn() {
         });
 	}
 }
+
+function uploadFile() {
+	// Make call to server to upload file
+}
