@@ -1,9 +1,11 @@
+import os
+import bcrypt
 from flask import Flask, request, render_template, redirect
 from flask.helpers import url_for
 from flask_admin import Admin
 from flask_login import login_required, logout_user, login_user, current_user, LoginManager, UserMixin
 from flask_sqlalchemy import SQLAlchemy
-import bcrypt
+from os.path import join, dirname, realpath
 
 app = Flask(__name__)
 
