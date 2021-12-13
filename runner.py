@@ -26,7 +26,7 @@ class Users(UserMixin, db.Model):
     username = db.Column(db.String, nullable = False, unique=True)
     name = db.Column(db.String, nullable = False)
     password = db.Column(db.String, nullable = False)
-    acct_type = db.Column(db.Integer, nullable = False) # 0 - User  1 - Admin
+    acct_type = db.Column(db.Integer) # 0 - User  1 - Admin. set to be nullable
 
     def __init__(self, username, name, password, acct_type):
         self.username = username
