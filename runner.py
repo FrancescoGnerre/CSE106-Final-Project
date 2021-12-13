@@ -8,7 +8,8 @@ from flask_sqlalchemy import SQLAlchemy
 from os.path import join, dirname, realpath
 from werkzeug.utils import secure_filename
 
-UPLOAD_FOLDER = 'static/files'
+UPLOAD_FOLDER = 'static/files' # for uploading files
+UPLOAD_FOLDER2 = "static/graphs" # for uploading images
 ALLOWED_EXTENSIONS = {'csv', 'png', 'jpg', 'jpeg'}
 
 app = Flask(__name__)
@@ -111,7 +112,12 @@ def admin():
 @app.route("/files", methods=["GET", "POST", "PUT", "DELETE"])
 @login_required
 def files():
-    return render_template("editFile.html")
+    if request.method == "GET":
+        return render_template("editFile.html")
+    elif request.method == "POST":
+        # FIXME to save file to static/files
+        return
+
 
 
 if __name__ == "__main__":
