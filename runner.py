@@ -26,18 +26,32 @@ def load_user(user_id):
 class Users(UserMixin, db.Model):
     __tablename__ = "Users"
     user_name = db.Column(db.String, primary_key=True)
-    password = db.Column(db.String, nullable=False)
+    pasword = db.Column(db.String, nullable=False)
     display_name = db.Column(db.String, nullable=False)
-    user_key =db.Column(db.Integer, nullable=False)
+    user_key = db.Column(db.Integer, nullable=False)
     # is_admin is for admin view. Only our accouts will be admin
-    is_admin = db.Column(db.Integer)
     # nullable = True is default
+    is_admin = db.Column(db.Integer)
+
+    def __init__(self, user_name, display_name, password, is_admin):
+        self.user_name = user_name
+        self.display_name = display_name
+        self.password = password
+        self.is_admin = is_admin
+
+    def salt_hash_check_password(self, password):
+        # does stuff
+        return self.password == password
+
+    def get_key(self):
+        return self.user_key
 
 
 # Login
 @app.route("/", methods=["GET", "POST"])
 def login():
     return render_template('login.html')
+
 
 # Logout
 @app.route("/logout")
