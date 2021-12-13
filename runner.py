@@ -23,17 +23,19 @@ login_manager.login_view = 'login'
 app.secret_key = 'keep it secret, keep it safe'
 db = SQLAlchemy(app)
 
-@login_manager.user_loader 
-def load_user(user_id): 
-    return Users.query.filter_by(id = user_id).first()
+
+@login_manager.user_loader
+def load_user(user_id):
+    return Users.query.filter_by(id=user_id).first()
+
 
 class Users(UserMixin, db.Model):
     __tablename__ = "Users"
-    id = db.Column(db.Integer, primary_key = True)
-    username = db.Column(db.String, nullable = False, unique=True)
-    name = db.Column(db.String, nullable = False)
-    password = db.Column(db.String, nullable = False)
-    acct_type = db.Column(db.Integer) # 0 - User  1 - Admin
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String, nullable=False, unique=True)
+    name = db.Column(db.String, nullable=False)
+    password = db.Column(db.String, nullable=False)
+    acct_type = db.Column(db.Integer)  # 0 - User  1 - Admin
 
     def __init__(self, username, name, password, acct_type):
         self.username = username
@@ -47,6 +49,7 @@ class Users(UserMixin, db.Model):
     def get_id(self):
         return self.id
 
+
 # Login
 @app.route("/", methods=["GET", "POST"])
 def login():
@@ -54,14 +57,15 @@ def login():
         return render_template("login.html")
     elif request.method == "POST":
         data = request.get_json()
-        user = Users.query.filter_by(username=data['username']).first() 
-        if user is None or not user.check_password(data['password']): 
+        user = Users.query.filter_by(username=data['username']).first()
+        if user is None or not user.check_password(data['password']):
             return (url_for("login"))[1:]
         login_user(user)
         if user.acct_type == 0:
             return url_for("home")[1:]
         elif user.acct_type == 1:
             return url_for("admin")[1:]
+
 
 # Logout
 @app.route("/logout")
@@ -70,14 +74,15 @@ def logout():
     logout_user()
     return "success"
 
+
 # Registration page
-@app.route("/registration", methods = ["GET", "POST"])
+@app.route("/registration", methods=["GET", "POST"])
 def register():
     if request.method == "GET":
         return render_template("registration.html")
     elif request.method == "POST":
         data = request.get_json()
-        user = Users.query.filter_by(username = data["username"]).first()
+        user = Users.query.filter_by(username=data["username"]).first()
         if user is None:
             password = data["password"]
             hashed = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
@@ -86,27 +91,31 @@ def register():
             db.session.commit()
             return "success"
 
+
 # Home page
-@app.route("/home", methods = ["GET", "POST"])
+@app.route("/home", methods=["GET", "POST"])
 @login_required
 def home():
     if request.method == "GET":
         return render_template("home.html")
 
+
 # Admin page
-@app.route("/admin", methods = ["GET", "POST", "PUT", "DELETE"])
+@app.route("/admin", methods=["GET", "POST", "PUT", "DELETE"])
 @login_required
 def admin():
     return "admin"
 
+
 # Upload files page
-@app.route("/files", methods = ["GET", "POST", "PUT", "DELETE"])
+@app.route("/files", methods=["GET", "POST", "PUT", "DELETE"])
 @login_required
 def files():
     return render_template("editFile.html")
 
+
 if __name__ == "__main__":
-    db.create_all() # Only need this line if db not created
+    db.create_all()  # Only need this line if db not created
     app.run(debug=True)
 
 # Makes sure uploaded file is allowed
