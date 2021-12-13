@@ -8,8 +8,12 @@ from flask_sqlalchemy import SQLAlchemy
 from os.path import join, dirname, realpath
 from werkzeug.utils import secure_filename
 
+UPLOAD_FOLDER = 'static/files'
+ALLOWED_EXTENSIONS = {'csv', 'png', 'jpg', 'jpeg'}
+
 app = Flask(__name__)
 
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///test.sqlite"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
@@ -104,3 +108,8 @@ def files():
 if __name__ == "__main__":
     db.create_all() # Only need this line if db not created
     app.run(debug=True)
+
+# Makes sure uploaded file is allowed
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
