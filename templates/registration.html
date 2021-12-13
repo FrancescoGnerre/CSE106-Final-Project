@@ -9,12 +9,14 @@
         <div class="registration">
             <form>
                 <label for="user_name">USERNAME:</label><br>
-                <input type="text" id="user_name" name="user_name" placeholder="Username"><br>
+                <input type="text" id="newUsername" name="newUsername" placeholder="Username"><br>
+                <label for="user_name">NAME:</label><br>
+                <input type="text" id="newName" name="newName" placeholder="Name"><br>
                 <label for="password">PASSWORD:</label><br>
-                <input type="password" id="password" name="password" placeholder="Password"><br>
-                <button type="button" id = "registerButton">Register</button>
-                <script src="../static/script.js"></script>
+                <input type="password" id="newPassword" name="newPassword" placeholder="Password"><br>
+                <button type="button" id = "registerButton" onclick="registerUser()">Register</button>
             </form>
         </div>
+        <script src="../static/script.js"></script>
     </body>
 </html>

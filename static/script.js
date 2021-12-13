@@ -18,3 +18,64 @@ function setPassword(newPassword){
 function consolePrint(x){
 	console.log(x);
 }
+
+// When user logs out
+function logOut() {
+	$.ajax({
+        url: "http://127.0.0.1:5000/logout",
+        type: "GET",
+        success: function(response){
+            window.location.href = "http://127.0.0.1:5000/"
+        }, 
+        error: function(status, error){
+            alert(error)
+        }
+    });
+}
+
+// When user goes to registration page
+function toRegistration() {
+	window.location.href = "http://127.0.0.1:5000/registration";
+}
+
+// When user creates a new user
+function registerUser() {
+	let username = $("#newUsername").val();
+    let password = $("#newPassword").val();
+	let name = $("#newName").val()
+    if (username !== "" && password !== "" && name !== "") {
+        $.ajax({
+            url: window.location.href,
+            type: "POST",
+            data: JSON.stringify({"username" : username, "password" : password, "name" : name}),
+            contentType: "application/JSON",
+            success: function(response){
+                alert("New Account Created! You can now log in!")
+                window.location.href = "http://127.0.0.1:5000/"
+            }, 
+            error: function(status, error){
+                alert(error)
+            }
+        });
+    }
+}
+
+// When user logs in
+function logIn() {
+	let username = $("#username").val();
+    let password = $("#password").val();
+	if (username !== "" && password !== "") {
+		$.ajax({
+            url: window.location.href,
+            type: "POST",
+            data: JSON.stringify({"username" : username, "password" : password}),
+            contentType: "application/JSON",
+            success: function(response){
+                window.location.href = "http://127.0.0.1:5000/" + response
+            }, 
+            error: function(status, error){
+                alert(error)
+            }
+        });
+	}
+}
