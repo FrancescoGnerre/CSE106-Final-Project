@@ -92,6 +92,12 @@ def home():
 def admin():
     return "admin"
 
+# Upload files page
+@app.route("/files", methods = ["GET", "POST", "PUT", "DELETE"])
+@login_required
+def files():
+    return render_template("editFile.html")
+
 if __name__ == "__main__":
     db.create_all() # Only need this line if db not created
     app.run(debug=True)
