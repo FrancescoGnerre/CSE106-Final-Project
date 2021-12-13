@@ -6,6 +6,7 @@ from flask_admin import Admin
 from flask_login import login_required, logout_user, login_user, current_user, LoginManager, UserMixin
 from flask_sqlalchemy import SQLAlchemy
 from os.path import join, dirname, realpath
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
