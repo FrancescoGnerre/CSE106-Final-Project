@@ -1,3 +1,6 @@
+import pandas as pd
+import matplotlib.pyplot as matPlot
+
 def graph_pie(csv, col):
     # csv is the file
     # col is the column that we care about
