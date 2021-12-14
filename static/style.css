@@ -262,7 +262,12 @@ input {
 }
 
 .uploadedPosts img {
-    margin-bottom: 10px;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.uploadedPosts label {
+    color: black;
 }
 
 .user {
