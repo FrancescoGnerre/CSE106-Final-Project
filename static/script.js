@@ -110,3 +110,8 @@ function uploadFile() {
 		}
 	});
 }
+
+$('.delete').on('click', function(){
+    $(this).parent().remove();
+    console.log($(this).parent().find(".fuckingthing").html())
+  });
