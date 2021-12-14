@@ -72,6 +72,15 @@ class Files(db.Model):
         self.name = name
         self.public = public
 
+class Posts(db.Model):
+    __tablename__ = "Posts"
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, nullable=False)
+    picture = db.Column(db.String, nullable=False)
+
+    def __init__(self, user_id, picture):
+        self.user_id = user_id
+        self.picture = picture
 
 # Login
 @app.route("/", methods=["GET", "POST"])
@@ -176,7 +185,17 @@ def viewFiles(filename):
                 matPlot.title(data["title"])
                 matPlot.savefig("static/files/" + data["title"] + ".png")
                 matPlot.close('all')
+                post = Posts(current_user.id, "static/files/" + data["title"] + ".png")
+                db.session.add(post)
+                db.session.commit()
                 return "success"
+            if data["type"] == "bar":
+                columns = df.columns
+                matPlot.bar(columns, col_y)
+                matPlot.title(name)
+                matPlot.xlabel(x_label)
+                matPlot.ylabel(y_label)
+                matPlot.show()
 
 
 if __name__ == "__main__":

@@ -109,7 +109,26 @@ function makePieGraph() {
 }
 
 function makeBarGraph() {
-    
+    let title = $("#graphTitle").val();
+    let dataLabel = $("#bDataLabel").val();
+    let row = $("#bRowNumber").val();
+    let xlabel = $("#xLabelBar").val();
+    let ylabel = $("#yLabelBar").val();
+
+    if (title !== "" && dataLabel !== "" &&  quanLabel !== "" &&  xlabel !== "" && ylabel !== "") {
+        $.ajax({
+            url: window.location.href,
+            type: "POST",
+            data: JSON.stringify({"title" : title, "dataLabel" : dataLabel, "row" : parseInt(row), 
+            "xlabel" : xlabel, "ylabel" : ylabel, "type" : "bar"}),
+            contentType: "application/JSON",
+            success: function(response){
+            }, 
+            error: function(status, error){
+                alert(error)
+            }
+        });
+    }
 }
 
 function makeLineGraph() {
