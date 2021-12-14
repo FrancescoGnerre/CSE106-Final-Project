@@ -47,11 +47,39 @@ input {
     margin: auto;
 }
 
-.teacher_view_classes {
-    background-position: center;
-    background-color: deepskyblue;
+.registration {
     width: 100%;
     height: 100vh;
+    background-position: center;
+    align-items: center;
+    text-align: center;
+    background-color:deepskyblue;
+    display: flex;
+}
+
+.registration label {
+    color:darkblue;
+}
+
+.registration button:hover{
+    background-color: lightgray;
+}
+
+.registration button:active{
+    background-color: white;
+}
+
+.registration form {
+    margin: auto;
+}
+
+.registration input[type=button] {
+    padding: 5px 5px;
+    border-radius: 3px;
+    border: none;
+    margin: 10px;
+    background-color: snow;
+    text-align: center;
 }
 
 .fileButtons {
