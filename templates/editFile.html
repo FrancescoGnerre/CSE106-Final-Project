@@ -8,24 +8,26 @@
     <body>
         <div class="editFiles">
             <form method="POST" action="" id="upload-file" enctype="multipart/form-data">
-                <p><input type="file" id="csvFile" accept=".csv" name="file"></p>
+                <input type="file" id="csvFile" accept=".csv" name="file">
             </form>
+            <input type="submit" onclick="uploadFile()" value="Submit">
+            <div class='fileButtons'>
+                <form>
+                    <input type="button" onclick="toHomePage()" value="Return">
+                </form>
+            </div>
+            <div class="uploadedFiles">
+                {% if uploadedFiles %}
+                    <h3>Files you've uploaded</h3>
+                    {% for file in uploadedFiles %}
+                        <ul>
+                            <li> <a href = "/files/{{file}}">{{file}} </a> <button class="delete">Delete</button></li>
+                        </ul>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <input type="button" onclick="logOut()" value="Log Out" />
         </div>
-        <p><input type="submit" onclick="uploadFile()" value="Submit"></p>
-        <div class='fileButtons'>
-            <form>
-                <input type="button"onclick="toHomePage()" value="Return" />
-            </form>
-        </div>
-        {% if uploadedFiles %}
-            <h3>Files you've uploaded</h3>
-            {% for file in uploadedFiles %}
-                <ul>
-                    <li> <a href = "/files/{{file}}">{{file}} </a> <button class="delete">Delete</button></li>
-                </ul>
-            {% endfor %}
-        {% endif %}
-        <p><input type="button" onclick="logOut()" value="Log Out" /></p>
         <script src="../static/script.js"></script>
     </body>
 </html>
