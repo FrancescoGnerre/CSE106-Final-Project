@@ -109,6 +109,9 @@ input {
 .home {
     width: 100%;
     height: 100vh; 
+    background-position: center;
+    align-items: center;
+    text-align: center;
     background-color:deepskyblue;
 }
 
@@ -116,6 +119,9 @@ input {
     color:darkblue;
 }
 
+.home button{
+    align-items: center;
+}
 .home button:hover{
     background-color: lightgray;
 }
