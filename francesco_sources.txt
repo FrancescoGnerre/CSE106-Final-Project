@@ -15,3 +15,4 @@ https://stackoverflow.com/questions/24419769/pandas-copying-using-iloc-not-worki
 https://www.askpython.com/python/built-in-methods/python-iloc-function
 https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.legend.html
 https://stackoverflow.com/questions/13021654/get-column-index-from-column-name-in-python-pandas
+https://www.kite.com/python/answers/how-to-get-the-index-of-a-pandas-dataframe-column-from-its-name-in-python
