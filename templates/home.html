@@ -19,9 +19,12 @@
             <div class="uploadedPosts">
                 {% if uploadedPosts %}
                     <h3>Posts by other users:</h3>
-                    {% for path in uploadedPosts %}
+                    {% for i in range(0,length) %}
                         <ul>
-                            <li> <img src="{{path}}"></li>
+                            <li> 
+                                <img src="{{uploadedPosts[i]}}"><br>
+                                <label> {{postUsers[i]}}</label>
+                            </li>
                         </ul>
                     {% endfor %}
                 {% endif %}

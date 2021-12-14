@@ -129,14 +129,20 @@ def register():
 @login_required
 def home():
     uploadedPosts = []
+    postUsers = []
+    idlist = []
     files = Posts.query.filter(Posts.user_id != current_user.id).all()
     for file in files:
-        if file.name not in uploadedPosts:
-            uploadedPosts.append(file.name)
-
+        if file.picture not in uploadedPosts:
+            uploadedPosts.append(file.picture)
+            idlist.append(file.user_id)
+    for uid in idlist:
+        user = Users.query.filter_by(id = uid)
+        for name in user:
+            postUsers.append(name.name)
     if request.method == "GET":
         # Loads the page
-        return render_template("home.html", uploadedPosts = uploadedPosts)
+        return render_template("home.html", length = len(uploadedPosts), uploadedPosts = uploadedPosts, postUsers = postUsers)
 
 
 # Admin page
