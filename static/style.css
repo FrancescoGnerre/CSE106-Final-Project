@@ -134,6 +134,7 @@ input {
     background-position: center;
     background-color: deepskyblue !important;
     min-width: 700px;
+    text-align: center;
 }
 
 .viewFile input[type=button]:hover{
