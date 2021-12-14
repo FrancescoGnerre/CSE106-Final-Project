@@ -128,8 +128,15 @@ def register():
 @app.route("/home", methods=["GET", "POST"])
 @login_required
 def home():
+    uploadedPosts = []
+    files = Posts.query.filter(Posts.user_id != current_user.id).all()
+    for file in files:
+        if file.name not in uploadedPosts:
+            uploadedPosts.append(file.name)
+
     if request.method == "GET":
-        return render_template("home.html")
+        # Loads the page
+        return render_template("home.html", uploadedPosts = uploadedPosts)
 
 
 # Admin page

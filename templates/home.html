@@ -16,8 +16,15 @@
                 </form>
                 <input type="button" onclick="logOut()" value="Log Out" />
             </div>
-            <div>Posts:<br>
-                <img src="pic_trulli.jpg" alt="Italian Trulli">
+            <div class="uploadedPosts">
+                {% if uploadedPosts %}
+                    <h3>Posts by other users:</h3>
+                    {% for path in uploadedPosts %}
+                        <ul>
+                            <li> <img src="{{path}}"></li>
+                        </ul>
+                    {% endfor %}
+                {% endif %}
             </div>
             
         </div>
