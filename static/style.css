@@ -21,7 +21,7 @@ input {
     margin: 10px;
 }
 
-.login, .registration {
+.login {
     width: 100%;
     height: 100vh;
     background-position: center;
@@ -31,12 +31,33 @@ input {
     display: flex;
 }
 
-.login, .registration label {
+.login label {
     color:darkblue;
 }
 
-.login, .registration form {
+.login button:hover{
+    background-color: lightgray;
+}
+
+.login button:active{
+    background-color: white;
+}
+
+.login form {
     margin: auto;
+}
+
+.teacher_view_classes {
+    background-position: center;
+    background-color: deepskyblue;
+    width: 100%;
+    height: 100vh;
+}
+
+.fileButtons {
+    width: 100%;
+    text-align: center;
+    position: absolute;
 }
 
 .logout {

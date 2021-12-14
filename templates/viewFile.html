@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <title>View Files</title>
+        <link href="../static/style.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <h1>{{name}} Page</h1>
+        <table>
+            <thead>
+                {% for column in columns %}
+                    <th>{{column}}</th>
+                {% endfor %}
+            </thead>
+            <tbody>
+                {% for i in range(rows) %}
+                    <tr>
+                        {% for j in data[i] %}
+                            <td>{{j}}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <p><input type="button" onclick="logOut()" value="Log Out" /></p>
+        <script src="../static/script.js"></script>
+    </body>
+</html>
