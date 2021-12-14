@@ -1,4 +1,4 @@
-all sources used:
+all sources used by francesco:
 https://stackoverflow.com/questions/1186789/what-is-the-best-way-to-call-a-script-from-another-script
 https://www.geeksforgeeks.org/bar-plot-in-matplotlib/
 https://www.tutorialspoint.com/matplotlib/matplotlib_bar_plot.htm
