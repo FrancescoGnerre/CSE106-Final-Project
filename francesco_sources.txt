@@ -10,3 +10,4 @@ https://www.kite.com/python/answers/how-to-find-the-number-of-pandas-dataframe-c
 https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.plot.line.html
 https://stackoverflow.com/questions/48814875/missing-1-required-keyword-only-argument
 https://favtutor.com/blogs/python-switch-case
+https://www.kite.com/python/answers/how-to-get-the-first-column-of-a-pandas-dataframe-as-a-series-in-python
