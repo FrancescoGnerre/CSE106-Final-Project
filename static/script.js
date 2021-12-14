@@ -153,6 +153,10 @@ function makeLineGraph() {
     }
 }
 
+function toAccount(){
+	window.location.href = "http://127.0.0.1:5000/user"
+}
+
 function backToFiles() {
     window.location.href = "http://127.0.0.1:5000/files";
 }
