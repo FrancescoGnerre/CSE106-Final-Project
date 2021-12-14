@@ -57,12 +57,13 @@ class Users(UserMixin, db.Model):
 class Files(db.Model):
     __tablename__ = "Files"
     id = db.Column(db.Integer, primary_key=True)
-    ### here goes the files / location
+    location = db.Column(db.String, nullable=False)
     user_id = db.Column(db.Integer, nullable=False)
     name = db.Column(db.String, nullable=False)
     public = db.Column(db.Integer, nullable=False)
 
-    def __init__(self, user_id, name, public):
+    def __init__(self, location, user_id, name, public):
+        self.location=location
         self.user_id = user_id
         self.name = name
         self.public = public
