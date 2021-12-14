@@ -82,6 +82,24 @@ input {
     text-align: center;
 }
 
+.home {
+    width: 100%;
+    height: 100vh; 
+    background-color:deepskyblue;
+}
+
+.home label {
+    color:darkblue;
+}
+
+.home button:hover{
+    background-color: lightgray;
+}
+
+.home button:active{
+    background-color: white;
+}
+
 .viewFile {
     background-position: center;
     background-color: deepskyblue;

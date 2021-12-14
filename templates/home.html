@@ -12,9 +12,13 @@
 
             </form>
         </div>
-        <div class="homeButtons">
+        <div class="home">
             <p><input type="button" onclick="toFilePage()" value="Upload Files" /></p>
             <p><input type="button" onclick="logOut()" value="Log Out" /></p>
+            <form>
+                <input type="text" id="username" name="username" placeholder="Username">
+                <button type="button" id = "searchbutton" onclick="toUserPage()">Search User</button><br>
+            </form>
         </div>
         <script src="../static/script.js"></script>
     </body>
