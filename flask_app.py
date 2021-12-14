@@ -12,6 +12,7 @@ import pandas as pd
 import mysql.connector
 import matplotlib.pyplot as matPlot
 
+
 UPLOAD_FOLDER = 'static/files'  # for uploading files
 UPLOAD_FOLDER2 = "static/graphs"  # for uploading images
 ALLOWED_EXTENSIONS = {'csv', 'png', 'jpg', 'jpeg'}
