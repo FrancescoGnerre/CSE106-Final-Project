@@ -10,6 +10,7 @@ from werkzeug.utils import secure_filename
 import sqlite3
 import pandas as pd
 import mysql.connector
+import grapher
 
 UPLOAD_FOLDER = 'static/files'  # for uploading files
 UPLOAD_FOLDER2 = "static/graphs"  # for uploading images
