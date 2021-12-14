@@ -221,7 +221,6 @@ input {
 
 .home {
     width: 100%;
-    height: 100vh;
     background-position: center;
     background-color:deepskyblue;
 }
@@ -250,6 +249,20 @@ input {
 
 .uploadedFiles {
     background-color: deepskyblue;
+}
+
+.uploadedPosts {
+    background-color: deepskyblue;
+    position: relative;
+    top: -630px;
+}
+
+.uploadedPosts h3 {
+    margin-bottom: 10px;
+}
+
+.uploadedPosts img {
+    margin-bottom: 10px;
 }
 
 .logout {
@@ -286,8 +299,4 @@ th {
 
 hr {
     border: 3px solid darkblue;
-}
-
-.uploadedPosts {
-    background-color: deepskyblue;
 }
