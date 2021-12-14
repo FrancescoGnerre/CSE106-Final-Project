@@ -131,8 +131,8 @@ def home():
     uploadedPosts = []
     files = Posts.query.filter(Posts.user_id != current_user.id).all()
     for file in files:
-        if file.name not in uploadedPosts:
-            uploadedPosts.append(file.name)
+        if file.picture not in uploadedPosts:
+            uploadedPosts.append(file.picture)
 
     if request.method == "GET":
         # Loads the page
