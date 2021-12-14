@@ -10,7 +10,7 @@ def graph_pie(csv, col, col_label, name, legend_name):
     # legend_name is the legend name
 
     matPlot.pie(col, labels=col_label)
-    matPlot.legend(col, title=legend_name)
+#    matPlot.legend(col, title=legend_name)
     matPlot.title(name)
     matPlot.show()
 
@@ -28,7 +28,7 @@ def graph_bar(csv, col_x, col_y, name, legend_name, x_label, y_label):
     matPlot.title(name)
     matPlot.xlabel(x_label)
     matPlot.ylabel(y_label)
-    matPlot.legend(title=legend_name)
+#    matPlot.legend(title=legend_name)
     matPlot.show()
 
 
