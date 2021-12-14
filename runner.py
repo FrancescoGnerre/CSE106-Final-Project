@@ -8,10 +8,11 @@ from flask_sqlalchemy import SQLAlchemy
 from os.path import join, dirname, realpath
 from werkzeug.utils import secure_filename
 import sqlite3
+import pandas as pd
+import mysql.connector
 
-
-UPLOAD_FOLDER = 'static/files' # for uploading files
-UPLOAD_FOLDER2 = "static/graphs" # for uploading images
+UPLOAD_FOLDER = 'static/files'  # for uploading files
+UPLOAD_FOLDER2 = "static/graphs"  # for uploading images
 ALLOWED_EXTENSIONS = {'csv', 'png', 'jpg', 'jpeg'}
 
 app = Flask(__name__)
@@ -51,6 +52,24 @@ class Users(UserMixin, db.Model):
 
     def get_id(self):
         return self.id
+
+
+class Files(db.Model):
+    __tablename__ = "Files"
+    id = db.Column(db.Integer, primary_key=True)
+    ### here goes the files / location
+    user_id = db.Column(db.Integer, nullable=False)
+    name = db.Column(db.String, nullable=False)
+    public = db.Column(db.Integer, nullable=False)
+
+    def __init__(self, user_id, name, public):
+        self.user_id = user_id
+        self.name = name
+        self.public = public
+
+
+# THIS LINE DOES NOT WORK
+# myDB = mysql.connector.connect(host="localhost", user="root", password="", database="Files")
 
 
 # Login
@@ -114,17 +133,28 @@ def admin():
 @app.route("/files", methods=["GET", "POST", "PUT", "DELETE"])
 @login_required
 def files():
+    uploaded_file = request.files['file']
+    if uploaded_file.filename != "":
+        file_path = os.path.join(app.config["UPLOAD_FOLDER"], uploaded_file.filename)
+        uploaded_file.save(file_path)
     if request.method == "GET":
         return render_template("editFile.html")
     elif request.method == "POST":
         # FIXME to save file to static/files
-        return
+        return 0
 
+
+def praseCSV(filePath):
+    col_names = ["a", "b", "c", "d"]  # NEEDS TO BE UPDATED LATER ON
+    csvData = pd.read_csv(filePath, names=col_names, header=None)
+    for i, row in csvData.iterrows():
+        print(i, row["a"], row["b"], row["c"], row["d"])
 
 
 if __name__ == "__main__":
     db.create_all()  # Only need this line if db not created
     app.run(debug=True)
+
 
 # Makes sure uploaded file is allowed
 def allowed_file(filename):
