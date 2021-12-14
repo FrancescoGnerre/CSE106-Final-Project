@@ -1,6 +1,8 @@
 var curr_name = "";
 var curr_password = "";
 var home_password = "";
+var list = document.getElementById('files');
+var lastid = 0;
 
 // sets name to be inputted username
 function setName(){
@@ -160,7 +162,38 @@ function uploadFile() {
 	});
 }
 
+function updateFiles(i) {
+    var filename = document.getElementById(i).value;
+    var entry = document.createElement('li');
+    entry.appendChild(document.createTextNode(filename));
+    entry.setAttribute('id','item'+lastid);
+    var removeButton = document.createElement('button');
+    removeButton.appendChild(document.createTextNode("remove"));
+    removeButton.setAttribute('onClick','removeFile("'+'item'+lastid+'","'+filename+'")');
+    entry.appendChild(removeButton);
+    lastid+=1;
+    list.appendChild(entry);
+}
+
+function removeFile(itemid, filename){
+    var item = document.getElementById(itemid);
+    list.removeChild(item);
+    console.log(filename)
+    // let name = filename
+    // $.ajax({
+    //     url: "http://127.0.0.1:5000/files",
+    //     type: "DELETE",
+    //     data: JSON.stringify({"name" : name,  "delete" : "user"}),
+    //     contentType: "application/JSON",
+    //     success: function(response){
+    //         alert("Successfully Deleted User!")
+    //         window.location.href = "http://127.0.0.1:5000/admin"
+    //     },
+    //     error: function(status, error){
+    //         alert(error)
+    //     }
+    //     });
+}
 $('.delete').on('click', function(){
     $(this).parent().remove();
-    console.log($(this).parent().find(".fuckingthing").html())
   });

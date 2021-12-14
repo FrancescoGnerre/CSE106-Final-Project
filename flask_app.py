@@ -151,7 +151,7 @@ def files():
 
     if request.method == "GET":
         # Loads the page
-        return render_template("editFile.html", uploadedFiles = uploadedFiles)
+        return render_template("editFile.html", uploadedFiles = uploadedFiles, length = len(uploadedFiles))
     elif request.method == "POST":
         # Uploads file to server and in the database
         if 'file' in request.files:
