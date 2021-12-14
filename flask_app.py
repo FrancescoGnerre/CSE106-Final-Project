@@ -76,7 +76,7 @@ class Posts(db.Model):
     __tablename__ = "Posts"
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, nullable=False)
-    picture = db.Column(db.String, nullable=False)
+    picture = db.Column(db.String, nullable=False, unique=True)
 
     def __init__(self, user_id, picture):
         self.user_id = user_id
@@ -196,13 +196,33 @@ def viewFiles(filename):
                 db.session.add(post)
                 db.session.commit()
                 return "success"
-            if data["type"] == "bar":
+            elif data["type"] == "bar":
                 columns = df.columns
-                matPlot.bar(columns, col_y)
-                matPlot.title(name)
-                matPlot.xlabel(x_label)
-                matPlot.ylabel(y_label)
-                matPlot.show()
+                row = df.iloc[data["row"]]
+                matPlot.bar(columns, row)
+                matPlot.title(data["title"])
+                matPlot.xlabel(data["xlabel"])
+                matPlot.ylabel(data["ylabel"])
+                matPlot.savefig("static/files/" + data["title"] + ".png")
+                matPlot.close('all')
+                post = Posts(current_user.id, "static/files/" + data["title"] + ".png")
+                db.session.add(post)
+                db.session.commit()
+                return "sucess"
+            elif data["type"] == "line":
+                num_cols = data["numcols"]
+                matPlot.plot(df.iloc[:, 1:num_cols+1])
+                matPlot.title(data["title"])
+                matPlot.xlabel(data["xlabel"])
+                matPlot.ylabel(data["ylabel"])
+                matPlot.legend(df.iloc[:, 1:num_cols+1], title=data["legend"])
+                matPlot.savefig("static/files/" + data["title"] + ".png")
+                matPlot.close('all')
+                post = Posts(current_user.id, "static/files/" + data["title"] + ".png")
+                db.session.add(post)
+                db.session.commit()
+                return "success"
+
 
 
 if __name__ == "__main__":

@@ -111,18 +111,16 @@ function makePieGraph() {
 }
 
 function makeBarGraph() {
-    let title = $("#graphTitle").val();
-    let dataLabel = $("#bDataLabel").val();
+    let title = $("#bTitle").val();
     let row = $("#bRowNumber").val();
-    let xlabel = $("#xLabelBar").val();
-    let ylabel = $("#yLabelBar").val();
+    let xlabel = $("#xlabelBar").val();
+    let ylabel = $("#ylabelBar").val();
 
-    if (title !== "" && dataLabel !== "" &&  quanLabel !== "" &&  xlabel !== "" && ylabel !== "") {
+    if (title !== "" &&  row !== "" &&  xlabel !== "" && ylabel !== "") {
         $.ajax({
             url: window.location.href,
             type: "POST",
-            data: JSON.stringify({"title" : title, "dataLabel" : dataLabel, "row" : parseInt(row), 
-            "xlabel" : xlabel, "ylabel" : ylabel, "type" : "bar"}),
+            data: JSON.stringify({"title" : title, "row" : parseInt(row), "xlabel" : xlabel, "ylabel" : ylabel, "type" : "bar"}),
             contentType: "application/JSON",
             success: function(response){
             }, 
@@ -134,7 +132,25 @@ function makeBarGraph() {
 }
 
 function makeLineGraph() {
-    
+    let title = $("#lTitle").val();
+    let legend = $("#llegname").val();
+    let numcols = $("#numcols").val();
+    let xlabel = $("#xlabelLine").val();
+    let ylabel = $("#ylabelLine").val();
+
+    if (title !== "" &&  legend !== "" &&  xlabel !== "" && ylabel !== "" && numcols !== "") {
+        $.ajax({
+            url: window.location.href,
+            type: "POST",
+            data: JSON.stringify({"title" : title, "legend" : legend, "numcols" : parseInt(numcols), "xlabel" : xlabel, "ylabel" : ylabel, "type" : "line"}),
+            contentType: "application/JSON",
+            success: function(response){
+            }, 
+            error: function(status, error){
+                alert(error)
+            }
+        });
+    }
 }
 
 function backToFiles() {

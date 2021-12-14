@@ -34,11 +34,8 @@
             <input type="button" onclick="makePieGraph()" value="Pie Graph"/>
             
             <h2>Make Bar Graph</h2>
-            <label for="btitle">Title:</label><br>
-            <input type="text" id="bTitle" name="btitle" placeholder="Title"><br>
-
-            <label for="bRowNumber">Data Label:</label><br>
-            <input type="text" id="bDataLabel" name="bDataLabel" placeholder="DLabel"><br>
+            <label for="bTitle">Title:</label><br>
+            <input type="text" id="bTitle" name="bTitle" placeholder="Title"><br>
 
             <label for="bRowNumber">Row Number:</label><br>
             <input type="number" id="bRowNumber" name="bRowNumber" placeholder="Row"><br>
@@ -50,7 +47,22 @@
             <input type="text" id="ylabelBar" name="ylabelBar" placeholder="YLabel"><br>
             <input type="button" onclick="makeBarGraph()" value="Bar Graph"/>
 
-            <input type="button" onclick="makeLineGraph()" value="Line Graph" />
+            <h2>Make Line Graph</h2>
+            <label for="ltitle">Title:</label><br>
+            <input type="text" id="lTitle" name="ltitle" placeholder="Title"><br>
+
+            <label for="llegname">Legend name:</label><br>
+            <input type="text" id="llegname" name="llegname" placeholder="Legend"><br>
+
+            <label for="numcol">Number of Columns:</label><br>
+            <input type="text" id="numcols" name="nunmcols" placeholder="NumCols"><br>
+
+            <label for="xlabelLine">X Label:</label><br>
+            <input type="text" id="xlabelLine" name="xlabelLine" placeholder="XLabel"><br>
+
+            <label for="ylabelLine">Y Label:</label><br>
+            <input type="text" id="ylabelLine" name="ylabelLine" placeholder="YLabel"><br>
+            <input type="button" onclick="makeLineGraph()" value="Line Graph" /><br>
             <input type="button" onclick="backToFiles()" value="Back"/>
         </div>
         <script src="../static/script.js"></script>
