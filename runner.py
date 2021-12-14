@@ -7,6 +7,8 @@ from flask_login import login_required, logout_user, login_user, current_user, L
 from flask_sqlalchemy import SQLAlchemy
 from os.path import join, dirname, realpath
 from werkzeug.utils import secure_filename
+import sqlite3
+
 
 UPLOAD_FOLDER = 'static/files' # for uploading files
 UPLOAD_FOLDER2 = "static/graphs" # for uploading images
