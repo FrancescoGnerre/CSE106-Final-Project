@@ -82,10 +82,28 @@ input {
     text-align: center;
 }
 
-.fileButtons {
+.viewFile {
+    background-position: center;
+    background-color: deepskyblue;
     width: 100%;
+    height: 100vh;
+}
+
+.viewFile button:hover{
+    background-color: lightgray;
+}
+
+.viewFile button:active{
+    background-color: white;
+}
+
+.viewFile input[type=button] {
+    padding: 5px 5px;
+    border-radius: 3px;
+    border: none;
+    margin: 10px;
+    background-color: snow;
     text-align: center;
-    position: absolute;
 }
 
 .logout {
