@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Admin Controls</title>
+        <link href="../static/style.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+    <body>
+
+    <div class="admin">
+        <h1>Users Data</h1>
+        <table id = "admin_users">
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Username</th>
+                    <th>Name</th>
+                    <th>Password</th>
+                    <th>Account Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{user.user_id}}</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.name}}</td>
+                    <td>{{user.password}}</td>
+                    <td>{{user.acct_type}}</td>
+                </tr>
+                {% endfor %}</tbody>
+        </table><br>
+        <hr>
+        <h1>Create New User</h1>
+        <form>
+            <label for="user_name">Username:</label><br>
+            <input type="text" id="add_username" name="user_name" placeholder="Username"><br>
+
+            <label for="name">Name:</label><br>
+            <input type="text" id="add_name" name="name" placeholder="Name"><br>
+
+            <label for="password">Password:</label><br>
+            <input type="text" id="add_password" name="password" placeholder="Password"><br>
+
+        </form>
+        <button type="button" id = "admin_newuser">Upload New User</button><br>
+        <hr>
+        <h1>Update User</h1>
+        <form>
+            <label for="update_original_user">Original Username:</label><br>
+            <input type="text" id="update_original_user" name="update_original_user" placeholder="Original Username"><br>
+
+            <label for="update_new_user">New Username:</label><br>
+            <input type="text" id="update_new_user" name="update_new_user" placeholder="New Username"><br>
+
+            <label for="update_new_name">New Name:</label><br>
+            <input type="text" id="update_new_name" name="update_new_name" placeholder="New Name"><br>
+
+            <label for="update_new_password">New Password:</label><br>
+            <input type="text" id="update_new_password" name="update_new_password" placeholder="New Password"><br>
+
+            <label for="update_new_type">New Account Type:</label><br>
+            <input type="number" id="update_new_type" name="update_new_type" placeholder="Account Type"><br>
+        </form>
+        <hr>
+        <h1>Delete User</h1><br>
+        <form>
+            <label for="delete_user">Username:</label><br>
+            <input type="delete_user" id="delete_user" name="delete_user" placeholder="Username"><br>
+        </form>
+        <button type="button" id = "delete_user_button">Delete User</button><br>
+        <hr>
+        <h1>Delete File</h1>
+        <form>
+            <label for="delete_file">File Name:</label><br>
+            <input type="delete_file" id="delete_file" name="delete_file" placeholder="file Name"><br>
+        </form>
+        <button type="button" id = "delete_file_button">Delete File</button><br>
+
+        <button type="button" id = "logoutAdmin" class = "logout">Log Out</button>
+        <script src="../static/script.js"></script>
+
+    </div>
+    </body>
+</html>

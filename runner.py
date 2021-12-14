@@ -67,8 +67,7 @@ class Files(db.Model):
     name = db.Column(db.String, nullable=False, unique=True)
     public = db.Column(db.Integer, nullable=False)
 
-    def __init__(self, location, user_id, name, public):
-        self.location=location
+    def __init__(self, user_id, name, public):
         self.user_id = user_id
         self.name = name
         self.public = public
@@ -128,29 +127,34 @@ def home():
 @app.route("/admin", methods=["GET", "POST", "PUT", "DELETE"])
 @login_required
 def admin():
-    return "admin"
+    return render_template("admin.html")
 
 
 # Upload files page
 @app.route("/files", methods=["GET", "POST", "PUT", "DELETE"])
 @login_required
 def files():
+    uploadedFiles = []
+    files = Files.query.filter_by(user_id = current_user.id)
+    for file in files:
+        if file.name not in uploadedFiles:
+            uploadedFiles.append(file.name)
+
     if request.method == "GET":
         # Loads the page
-        return render_template("editFile.html")
+        return render_template("editFile.html", uploadedFiles = uploadedFiles)
     elif request.method == "POST":
         # Uploads file to server and in the database
         if 'file' in request.files:
             file = request.files['file']
-            if file.filename != "":
+            if file.filename != "" and not Files.query.filter_by(name = file.filename).first():
                 if file and allowed_file(file.filename):
                     filename = secure_filename(file.filename)
                     newFile = Files(current_user.id, filename, 0)
                     db.session.add(newFile)
                     db.session.commit()
                     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                    return render_template("editFile.html")
-        return render_template("editFile.html")
+                    return "success"
 
 if __name__ == "__main__":
     db.create_all()  # Only need this line if db not created

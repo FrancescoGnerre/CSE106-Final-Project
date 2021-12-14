@@ -44,6 +44,10 @@ function toFilePage() {
 	window.location.href = "http://127.0.0.1:5000/files";
 }
 
+function toHomePage() {
+	window.location.href = "http://127.0.0.1:5000/home";
+}
+
 // When user creates a new user
 function registerUser() {
 	let username = $("#newUsername").val();
@@ -102,6 +106,7 @@ function uploadFile() {
 		}, 
 		error: function(status, error){
             alert(error)
+            window.location.href = "http://127.0.0.1:5000/files"
 		}
 	});
 }
