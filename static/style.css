@@ -287,3 +287,7 @@ th {
 hr {
     border: 3px solid darkblue;
 }
+
+.uploadedPosts {
+    background-color: deepskyblue;
+}
