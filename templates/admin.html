@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Admin Controls</title>
-        <link href="../static/styles.css" rel="stylesheet">
+        <link href="../static/style.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
     <body>
@@ -42,9 +42,6 @@
             <label for="password">Password:</label><br>
             <input type="text" id="add_password" name="password" placeholder="Password"><br>
 
-            <label for="acct_type">Account Type:</label><br>
-            <p>0-Student 1-Teacher 2-Admin</p>
-            <input type="number" id="add_acct_type" name="acct_type" placeholder="Account Type"><br>
         </form>
         <button type="button" id = "admin_newuser">Upload New User</button><br>
         <hr>
@@ -75,11 +72,11 @@
         <hr>
         <h1>Delete File</h1>
         <form>
-            <label for="delete_file">Cfile Name:</label><br>
+            <label for="delete_file">File Name:</label><br>
             <input type="delete_file" id="delete_file" name="delete_file" placeholder="file Name"><br>
         </form>
-        <button type="button" id = "delete_class_button">Delete File<button><br>
-        <hr>
+        <button type="button" id = "delete_file_button">Delete File</button><br>
+
         <button type="button" id = "logoutAdmin" class = "logout">Log Out</button>
         <script src="../static/script.js"></script>
 

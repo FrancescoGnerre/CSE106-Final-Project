@@ -128,7 +128,7 @@ def home():
 @app.route("/admin", methods=["GET", "POST", "PUT", "DELETE"])
 @login_required
 def admin():
-    return "admin"
+    return render_template("admin.html")
 
 
 # Upload files page
