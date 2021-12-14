@@ -9,8 +9,8 @@
         <h1>{{name}} Page</h1>
         <table>
             <thead>
-                {% for i in range(length) %}
-                    <th>{{columns[i]}}</th>
+                {% for column in columns %}
+                    <th>{{column}}</th>
                 {% endfor %}
             </thead>
             <tbody>
