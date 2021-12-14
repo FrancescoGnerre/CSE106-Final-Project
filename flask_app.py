@@ -10,7 +10,7 @@ from werkzeug.utils import secure_filename
 import sqlite3
 import pandas as pd
 import mysql.connector
-import grapher
+import matplotlib.pyplot as matPlot
 
 UPLOAD_FOLDER = 'static/files'  # for uploading files
 UPLOAD_FOLDER2 = "static/graphs"  # for uploading images
@@ -161,14 +161,22 @@ def files():
 def viewFiles(filename):
     file = Files.query.filter_by(name = filename).first()
     if file is not None:
-        data = pd.read_csv("static/files/" + filename)
-        rows = data.shape[0]
-        columns = data.columns
-        data = data.values
+        df = pd.read_csv("static/files/" + filename)
+        rows = df.shape[0]
+        columns = df.columns
+        data = df.values
         if request.method == "GET":
             return render_template("viewFile.html", name=filename, columns=columns, data=data, length=len(columns), rows=rows)
         if request.method == "POST":
-            return
+            data = request.get_json()
+            if data["type"] == "pie":
+                row = df.iloc[data["row"]]
+                labels = df.columns
+                matPlot.pie(row, labels=labels)
+                matPlot.title(data["title"])
+                matPlot.savefig("static/files/" + data["title"] + ".png")
+                matPlot.close('all')
+                return "success"
 
 
 if __name__ == "__main__":

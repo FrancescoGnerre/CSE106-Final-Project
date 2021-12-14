@@ -91,7 +91,21 @@ function logIn() {
 }
 
 function makePieGraph() {
-
+    let title = $("#graphTitle").val();
+    let row = $("#rowNumber").val();
+    if (title !== "" && row !== "") {
+        $.ajax({
+            url: window.location.href,
+            type: "POST",
+            data: JSON.stringify({"title" : title, "row" : parseInt(row), "type" : "pie"}),
+            contentType: "application/JSON",
+            success: function(response){
+            }, 
+            error: function(status, error){
+                alert(error)
+            }
+        });
+    }
 }
 
 function makeBarGraph() {

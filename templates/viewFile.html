@@ -25,9 +25,16 @@
                 </tbody>
             </table>
             <input type="button" onclick="logOut()" value="Log Out"/>
+            <br>
+            <h2>Make Pie Graph</h2>
+            <label for="title">Graph Title:</label><br>
+            <input type="text" id="graphTitle" name="title" placeholder="Title"><br>
+            <label for="user_name">Row Number:</label><br>
+            <input type="number" id="rowNumber" name="rowNumber" placeholder="Row"><br>
+            <input type="button" onclick="makePieGraph()" value="Pie Graph"/>
+            
             <input type="button" onclick="makeBarGraph()" value="Bar Graph"/>
             <input type="button" onclick="makeLineGraph()" value="Line Graph" />
-            <input type="button" onclick="makePieGraph()" value="Pie Graph"/>
             <input type="button" onclick="backToFiles()" value="Back"/>
         </div>
         <script src="../static/script.js"></script>
