@@ -158,7 +158,7 @@ def user():
         # Loads the page
         return render_template("user.html", uploadedPosts = uploadedPosts, name ="You")
 
-@app.route("/user/<name>", methods=["GET"])
+@app.route("/user/<name>", methods=["GET", "POST"])
 def view_user(name):
     uploadedPosts = []
     uid = Users.query.filter_by(username = name).first()
