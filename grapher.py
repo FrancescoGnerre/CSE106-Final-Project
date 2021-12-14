@@ -2,25 +2,20 @@ import pandas as pd
 import matplotlib.pyplot as matPlot
 
 
-def graph_pie(csv, col, col_label, name, legend_name):
-    # csv is the file
+def graph_pie(col, col_label, name):
     # col is the column that we care about
     # col_label is the column label
     # name is the graph name
-    # legend_name is the legend name
 
     matPlot.pie(col, labels=col_label)
-#    matPlot.legend(col, title=legend_name)
     matPlot.title(name)
     matPlot.show()
 
 
-def graph_bar(csv, col_x, col_y, name, legend_name, x_label, y_label):
-    # csv is the file
+def graph_bar(col_x, col_y, name, x_label, y_label):
     # col_x is the column that we use for the x
     # col_y is the column that we use for the y
     # name is the graph name
-    # legend_name is the legend name
     # x_label is the x axis label
     # y_label is the y axis label
 
@@ -28,18 +23,17 @@ def graph_bar(csv, col_x, col_y, name, legend_name, x_label, y_label):
     matPlot.title(name)
     matPlot.xlabel(x_label)
     matPlot.ylabel(y_label)
-#    matPlot.legend(title=legend_name)
     matPlot.show()
 
 
 def graph_line(csv, num_cols, legend_name, name, x_label, y_label):
     # csv is the file
-    # num_cols is the number of columns we care about about in the y
+    # num_cols is the number of columns we care about in the y
     # col_x is the column we use for the x
     # name is the graph name
     # legend_name is the legend name
-    # x_label is the x axis label
-    # y_label is the y axis label
+    # x_label is the x-axis label
+    # y_label is the y-axis label
 
     if num_cols == 1:
 
