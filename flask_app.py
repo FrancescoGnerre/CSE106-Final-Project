@@ -161,7 +161,7 @@ def user():
 @app.route("/user/<name>", methods=["GET"])
 def view_user(name):
     uploadedPosts = []
-    uid = Users.query.filter_by(username = name)
+    uid = Users.query.filter_by(username = name).first()
     files = Posts.query.filter_by(user_id = uid.id)
     for file in files:
         if file.picture not in uploadedPosts:
