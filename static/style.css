@@ -9,12 +9,28 @@
     text-align: center;
 }
 
+input[type=button]{
+    padding: 5px 5px;
+    border-radius: 3px;
+    border: none;
+    margin: 10px;
+    background-color: snow;    
+}
+
 button {
     padding: 5px 5px;
     border-radius: 3px;
     border: none;
     margin: 10px;
     background-color: snow;
+}
+
+button:hover{
+    background-color: lightgray;
+}
+
+button:active{
+    background-color: white;
 }
 
 input {
@@ -82,6 +98,14 @@ input {
     text-align: center;
 }
 
+.registration input[type=button]:active{
+    background-color: white;
+}
+
+.registration input[type=button]:hover{
+    background-color: lightgray;
+}
+
 .home {
     width: 100%;
     height: 100vh; 
@@ -107,11 +131,11 @@ input {
     height: 100vh;
 }
 
-.viewFile button:hover{
+.viewFile input[type=button]:hover{
     background-color: lightgray;
 }
 
-.viewFile button:active{
+.viewFile input[type=button]:active{
     background-color: white;
 }
 
@@ -122,6 +146,105 @@ input {
     margin: 10px;
     background-color: snow;
     text-align: center;
+}
+
+.editFiles {
+    background-position: center;
+    background-color: deepskyblue;
+    width: 100%;
+    height: 100vh;
+}
+
+.editFiles input[type=submit]:hover{
+    background-color: lightgray;
+}
+
+.editFiles input[type=submit]:active{
+    background-color: white;
+}
+
+.editFiles input[type=submit]{
+    padding: 5px 5px;
+    border-radius: 3px;
+    border: none;
+    margin: 10px;
+    background-color: snow;
+    text-align: center;
+}
+
+.editFiles input[type=submit]:hover{
+    background-color: lightgray;
+}
+
+.editFiles input[type=submit]:active{
+    background-color: white;
+}
+
+.editFiles input[type=button] {
+    padding: 5px 5px;
+    border-radius: 3px;
+    border: none;
+    margin: 10px;
+    background-color: snow;
+    text-align: center;
+}
+
+.editFiles input[type=button]:hover{
+    background-color: lightgray;
+}
+
+.editFiles input[type=button]:active{
+    background-color: white;
+}
+
+.fileButtons input[type=button] {
+    padding: 5px 5px;
+    border-radius: 3px;
+    border: none;
+    margin: 10px;
+    background-color: snow;
+    text-align: center;
+}
+
+.fileButtons button:hover{
+    background-color: lightgray;
+}
+
+.fileButtons button:active{
+    background-color: white;
+}
+
+.home {
+    width: 100%;
+    height: 100vh;
+    background-position: center;
+    background-color:deepskyblue;
+}
+
+.home h1 {
+    text-align: center;
+}
+
+.homeButtons input[type=button]{
+    padding: 5px 5px;
+    border-radius: 3px;
+    border: none;
+    margin: 10px;
+    background-color: snow;
+    text-align: center;
+    display: flex;
+}
+
+.homeButtons input[type=button]:hover{
+    background-color: lightgray;
+}
+
+.homeButtons input[type=button]:active{
+    background-color: white;
+}
+
+.uploadedFiles {
+    background-color: deepskyblue;
 }
 
 .logout {
