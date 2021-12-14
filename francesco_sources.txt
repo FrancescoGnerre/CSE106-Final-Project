@@ -11,3 +11,7 @@ https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.plot.line.html
 https://stackoverflow.com/questions/48814875/missing-1-required-keyword-only-argument
 https://favtutor.com/blogs/python-switch-case
 https://www.kite.com/python/answers/how-to-get-the-first-column-of-a-pandas-dataframe-as-a-series-in-python
+https://stackoverflow.com/questions/24419769/pandas-copying-using-iloc-not-working-as-expected
+https://www.askpython.com/python/built-in-methods/python-iloc-function
+https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.legend.html
+https://stackoverflow.com/questions/13021654/get-column-index-from-column-name-in-python-pandas
