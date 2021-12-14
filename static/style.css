@@ -21,7 +21,7 @@ input {
     margin: 10px;
 }
 
-.login, .registration {
+.login {
     width: 100%;
     height: 100vh;
     background-position: center;
@@ -31,12 +31,61 @@ input {
     display: flex;
 }
 
-.login, .registration label {
+.login label {
     color:darkblue;
 }
 
-.login, .registration form {
+.login button:hover{
+    background-color: lightgray;
+}
+
+.login button:active{
+    background-color: white;
+}
+
+.login form {
     margin: auto;
+}
+
+.registration {
+    width: 100%;
+    height: 100vh;
+    background-position: center;
+    align-items: center;
+    text-align: center;
+    background-color:deepskyblue;
+    display: flex;
+}
+
+.registration label {
+    color:darkblue;
+}
+
+.registration button:hover{
+    background-color: lightgray;
+}
+
+.registration button:active{
+    background-color: white;
+}
+
+.registration form {
+    margin: auto;
+}
+
+.registration input[type=button] {
+    padding: 5px 5px;
+    border-radius: 3px;
+    border: none;
+    margin: 10px;
+    background-color: snow;
+    text-align: center;
+}
+
+.fileButtons {
+    width: 100%;
+    text-align: center;
+    position: absolute;
 }
 
 .logout {

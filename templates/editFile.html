@@ -22,6 +22,7 @@
             {% for file in uploadedFiles %}
                 <ul>
                     <li class='fuckingthing'>{{file}} <button class="delete">Delete</button></li>
+                    <li><a href = "/files/{{file}}">{{file}}</a></li>
                 </ul>
             {% endfor %}
         {% endif %}

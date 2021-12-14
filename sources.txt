@@ -1,0 +1,10 @@
+all sources used:
+https://stackoverflow.com/questions/1186789/what-is-the-best-way-to-call-a-script-from-another-script
+https://www.geeksforgeeks.org/bar-plot-in-matplotlib/
+https://www.tutorialspoint.com/matplotlib/matplotlib_bar_plot.htm
+https://www.w3schools.com/python/matplotlib_pie_charts.asp
+https://www.geeksforgeeks.org/how-to-get-column-names-in-pandas-dataframe/
+https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.hist.html
+https://stackoverflow.com/questions/43272206/python-legend-overlaps-with-the-pie-chart
+https://www.kite.com/python/answers/how-to-find-the-number-of-pandas-dataframe-columns-in-python
+https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.plot.line.html
