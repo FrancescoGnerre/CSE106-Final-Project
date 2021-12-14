@@ -154,6 +154,7 @@ input {
 }
 
 .editFiles {
+    text-align: center;
     background-position: center;
     background-color: deepskyblue !important;
     width: 100%;
@@ -166,6 +167,11 @@ input {
 
 .editFiles input[type=submit]:active{
     background-color: white;
+}
+
+.editFiles form input[type=file] {
+    position: relative;
+    left: 30px;
 }
 
 .editFiles input[type=submit]{
@@ -200,6 +206,11 @@ input {
 
 .editFiles input[type=button]:active{
     background-color: white;
+}
+
+.uploadedFiles ul li{
+    position: relative;
+    left: 10px;
 }
 
 .fileButtons input[type=button] {
@@ -292,7 +303,6 @@ input {
 .user input[type=button]:active{
     background-color: white;
 }
-
 
 .logout {
     height: 20px;
