@@ -156,6 +156,19 @@ def files():
                     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                     return "success"
 
+@app.route("/files/<filename>", methods=["GET", "POST", "DELETE"])
+@login_required
+def viewFiles(filename):
+    file = Files.query.filter_by(name = filename).first()
+    if file is not None:
+        data = pd.read_csv("static/files/" + filename)
+        rows = data.shape[0]
+        columns = data.columns
+        data = data.values
+        if request.method == "GET":
+            return render_template("viewFile.html", name=filename, columns=columns, data=data, length=len(columns), rows=rows)
+
+
 if __name__ == "__main__":
     db.create_all()  # Only need this line if db not created
     app.run(debug=True)
