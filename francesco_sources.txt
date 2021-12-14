@@ -9,3 +9,4 @@ https://stackoverflow.com/questions/43272206/python-legend-overlaps-with-the-pie
 https://www.kite.com/python/answers/how-to-find-the-number-of-pandas-dataframe-columns-in-python
 https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.plot.line.html
 https://stackoverflow.com/questions/48814875/missing-1-required-keyword-only-argument
+https://favtutor.com/blogs/python-switch-case
