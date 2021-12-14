@@ -150,21 +150,24 @@ def home():
 @login_required
 def user():
     uploadedPosts = []
-    postUsers = []
-    idlist = []
-    files = Posts.query.filter(Posts.user_id == current_user.id).all()
+    files = Posts.query.filter_by(user_id = current_user.id)
     for file in files:
         if file.picture not in uploadedPosts:
             uploadedPosts.append(file.picture)
-            idlist.append(file.user_id)
-    for uid in idlist:
-        user = Users.query.filter_by(id = uid)
-        for name in user:
-            postUsers.append(name.name)
     if request.method == "GET":
         # Loads the page
-        return render_template("home.html", length = len(uploadedPosts), uploadedPosts = uploadedPosts, postUsers = postUsers)
+        return render_template("user.html", uploadedPosts = uploadedPosts, name ="You")
 
+@app.route("/user/<name>", methods=["GET"])
+def view_user(name):
+    uploadedPosts = []
+    uid = Users.query.filter_by(username = name)
+    files = Posts.query.filter_by(user_id = uid.id)
+    for file in files:
+        if file.picture not in uploadedPosts:
+            uploadedPosts.append(file.picture)
+    if request.method == "GET":
+            return render_template("user.html", name=uid.name, uploadedPosts = uploadedPosts)
 
 # Admin page
 @app.route("/admin", methods=["GET", "POST", "PUT", "DELETE"])

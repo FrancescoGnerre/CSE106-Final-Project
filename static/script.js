@@ -50,6 +50,11 @@ function toHomePage() {
 	window.location.href = "http://127.0.0.1:5000/home";
 }
 
+function toUserPage() {
+    user = document.getElementById("username").value;
+    window.location.href = "http://127.0.0.1:5000/user/" + user;
+}
+
 // When user creates a new user
 function registerUser() {
 	let username = $("#newUsername").val();

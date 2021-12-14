@@ -14,12 +14,10 @@
             </div>
             <div class="uploadedPosts">
                 {% if uploadedPosts %}
-                    <h3>Posts by you:</h3>
-                    {% for i in range(0,length) %}
+                    <h3>Posts by {{name}}:</h3>
+                    {% for file in uploadedPosts %}
                         <ul>
-                            <li>
-                                <img src="{{uploadedPosts[i]}}" style="width:400px;height:400px;"><br>
-                            </li>
+                            <img src="{{file}}" style="width:400px;height:400px;"><br>
                         </ul>
                     {% endfor %}
                 {% endif %}
