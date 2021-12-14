@@ -68,10 +68,6 @@ class Files(db.Model):
         self.public = public
 
 
-# THIS LINE DOES NOT WORK
-# myDB = mysql.connector.connect(host="localhost", user="root", password="", database="Files")
-
-
 # Login
 @app.route("/", methods=["GET", "POST"])
 def login():
@@ -133,22 +129,12 @@ def admin():
 @app.route("/files", methods=["GET", "POST", "PUT", "DELETE"])
 @login_required
 def files():
-    uploaded_file = request.files['file']
-    if uploaded_file.filename != "":
-        file_path = os.path.join(app.config["UPLOAD_FOLDER"], uploaded_file.filename)
-        uploaded_file.save(file_path)
     if request.method == "GET":
         return render_template("editFile.html")
     elif request.method == "POST":
         # FIXME to save file to static/files
         return 0
 
-
-def praseCSV(filePath):
-    col_names = ["a", "b", "c", "d"]  # NEEDS TO BE UPDATED LATER ON
-    csvData = pd.read_csv(filePath, names=col_names, header=None)
-    for i, row in csvData.iterrows():
-        print(i, row["a"], row["b"], row["c"], row["d"])
 
 
 if __name__ == "__main__":
