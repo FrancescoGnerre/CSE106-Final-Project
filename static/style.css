@@ -229,6 +229,14 @@ input {
     text-align: center;
 }
 
+.home input[type=button]:hover{
+    background-color: lightgray;
+}
+
+.home input[type=button]:active{
+    background-color: white;
+}
+
 .homeButtons input[type=button]{
     padding: 5px 5px;
     border-radius: 3px;
