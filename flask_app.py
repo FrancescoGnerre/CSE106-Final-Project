@@ -12,15 +12,20 @@ import pandas as pd
 import mysql.connector
 import matplotlib.pyplot as matPlot
 
-
-UPLOAD_FOLDER = 'static/files'  # for uploading files
-UPLOAD_FOLDER2 = "static/graphs"  # for uploading images
+UPLOAD_FOLDER = '/home/alexholt54/mysite/static/files'  # for uploading files
 ALLOWED_EXTENSIONS = {'csv', 'png', 'jpg', 'jpeg'}
 
 app = Flask(__name__)
 
+
+SQL_ALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}".format(
+    username="alexholt54",
+    password="mytopsecretpassword",
+    hostname="alexholt54.mysql.pythonanywhere-services.com",
+    databasename="alexholt54$graphs")
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///test.sqlite"
+app.config["SQLALCHEMY_DATABASE_URI"] = SQL_ALCHEMY_DATABASE_URI
+app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
 login_manager = LoginManager()
@@ -43,9 +48,9 @@ def allowed_file(filename):
 class Users(UserMixin, db.Model):
     __tablename__ = "Users"
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String, nullable=False, unique=True)
-    name = db.Column(db.String, nullable=False)
-    password = db.Column(db.String, nullable=False)
+    username = db.Column(db.String(20), nullable=False, unique=True)
+    name = db.Column(db.String(50), nullable=False)
+    password = db.Column(db.String(100), nullable=False)
     acct_type = db.Column(db.Integer)  # 0 - User  1 - Admin
 
     def __init__(self, username, name, password, acct_type):
@@ -55,7 +60,7 @@ class Users(UserMixin, db.Model):
         self.acct_type = acct_type
 
     def check_password(self, password):
-        return bcrypt.checkpw(password.encode("utf-8"), self.password)
+        return bcrypt.checkpw(password.encode("utf-8"), self.password.encode('utf8'))
 
     def get_id(self):
         return self.id
@@ -65,7 +70,7 @@ class Files(db.Model):
     __tablename__ = "Files"
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, nullable=False)
-    name = db.Column(db.String, nullable=False, unique=True)
+    name = db.Column(db.String(100), nullable=False, unique=True)
     public = db.Column(db.Integer, nullable=False)
 
     def __init__(self, user_id, name, public):
@@ -77,7 +82,7 @@ class Posts(db.Model):
     __tablename__ = "Posts"
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, nullable=False)
-    picture = db.Column(db.String, nullable=False, unique=True)
+    picture = db.Column(db.String(500), nullable=False, unique=True)
 
     def __init__(self, user_id, picture):
         self.user_id = user_id
@@ -96,8 +101,30 @@ def login():
         login_user(user)
         if user.acct_type == 0:
             return url_for("home")[1:]
-        elif user.acct_type == 1:
-            return url_for("admin")[1:]
+
+# User page
+@app.route("/user", methods=["GET", "POST"])
+@login_required
+def user():
+    uploadedPosts = []
+    files = Posts.query.filter_by(user_id = current_user.id)
+    for file in files:
+        if file.picture not in uploadedPosts:
+            uploadedPosts.append(file.picture)
+    if request.method == "GET":
+        # Loads the page
+        return render_template("user.html", uploadedPosts = uploadedPosts, name ="You")
+
+@app.route("/user/<name>", methods=["GET", "POST"])
+def view_user(name):
+    uploadedPosts = []
+    uid = Users.query.filter_by(username = name).first()
+    files = Posts.query.filter_by(user_id = uid.id)
+    for file in files:
+        if file.picture not in uploadedPosts:
+            uploadedPosts.append(file.picture)
+    if request.method == "GET":
+            return render_template("user.html", name=uid.name, uploadedPosts = uploadedPosts)
 
 
 # Logout
@@ -106,7 +133,6 @@ def login():
 def logout():
     logout_user()
     return "success"
-
 
 # Registration page
 @app.route("/registration", methods=["GET", "POST"])
@@ -141,41 +167,10 @@ def home():
         user = Users.query.filter_by(id = uid)
         for name in user:
             postUsers.append(name.name)
+
     if request.method == "GET":
         # Loads the page
-        return render_template("home.html", length = len(uploadedPosts), uploadedPosts = uploadedPosts, postUsers = postUsers)
-
-
-# User page
-@app.route("/user", methods=["GET", "POST"])
-@login_required
-def user():
-    uploadedPosts = []
-    files = Posts.query.filter_by(user_id = current_user.id)
-    for file in files:
-        if file.picture not in uploadedPosts:
-            uploadedPosts.append(file.picture)
-    if request.method == "GET":
-        # Loads the page
-        return render_template("user.html", uploadedPosts = uploadedPosts, name ="You")
-
-@app.route("/user/<name>", methods=["GET", "POST"])
-def view_user(name):
-    uploadedPosts = []
-    uid = Users.query.filter_by(username = name).first()
-    files = Posts.query.filter_by(user_id = uid.id)
-    for file in files:
-        if file.picture not in uploadedPosts:
-            uploadedPosts.append(file.picture)
-    if request.method == "GET":
-            return render_template("user.html", name=uid.name, uploadedPosts = uploadedPosts)
-
-# Admin page
-@app.route("/admin", methods=["GET", "POST", "PUT", "DELETE"])
-@login_required
-def admin():
-    return render_template("admin.html")
-
+        return render_template("home.html", uploadedPosts = uploadedPosts, length = len(uploadedPosts), postUsers = postUsers)
 
 # Upload files page
 @app.route("/files", methods=["GET", "POST", "PUT", "DELETE"])
@@ -189,7 +184,7 @@ def files():
 
     if request.method == "GET":
         # Loads the page
-        return render_template("editFile.html", uploadedFiles = uploadedFiles, length = len(uploadedFiles))
+        return render_template("editFile.html", uploadedFiles = uploadedFiles)
     elif request.method == "POST":
         # Uploads file to server and in the database
         if 'file' in request.files:
@@ -200,7 +195,7 @@ def files():
                     newFile = Files(current_user.id, filename, 0)
                     db.session.add(newFile)
                     db.session.commit()
-                    file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                    file.save(os.path.join(app.root_path, app.config['UPLOAD_FOLDER'], filename))
                     return "success"
 
 @app.route("/files/<filename>", methods=["GET", "POST", "DELETE"])
@@ -208,7 +203,7 @@ def files():
 def viewFiles(filename):
     file = Files.query.filter_by(name = filename).first()
     if file is not None:
-        df = pd.read_csv("static/files/" + filename)
+        df = pd.read_csv("/home/alexholt54/mysite/static/files/" + filename)
         rows = df.shape[0]
         columns = df.columns
         data = df.values
@@ -221,9 +216,9 @@ def viewFiles(filename):
                 labels = df.columns
                 matPlot.pie(row, labels=labels)
                 matPlot.title(data["title"])
-                matPlot.savefig("static/files/" + data["title"] + ".png")
+                matPlot.savefig("/home/alexholt54/mysite/static/files/" + data["title"] + ".png")
                 matPlot.close('all')
-                post = Posts(current_user.id, "static/files/" + data["title"] + ".png")
+                post = Posts(current_user.id, data["title"] + ".png")
                 db.session.add(post)
                 db.session.commit()
                 return "success"
@@ -234,12 +229,12 @@ def viewFiles(filename):
                 matPlot.title(data["title"])
                 matPlot.xlabel(data["xlabel"])
                 matPlot.ylabel(data["ylabel"])
-                matPlot.savefig("static/files/" + data["title"] + ".png")
+                matPlot.savefig("/home/alexholt54/mysite/static/files/" + data["title"] + ".png")
                 matPlot.close('all')
-                post = Posts(current_user.id, "static/files/" + data["title"] + ".png")
+                post = Posts(current_user.id,data["title"] + ".png")
                 db.session.add(post)
                 db.session.commit()
-                return "sucess"
+                return "success"
             elif data["type"] == "line":
                 num_cols = data["numcols"]
                 matPlot.plot(df.iloc[:, 1:num_cols+1])
@@ -247,13 +242,12 @@ def viewFiles(filename):
                 matPlot.xlabel(data["xlabel"])
                 matPlot.ylabel(data["ylabel"])
                 matPlot.legend(df.iloc[:, 1:num_cols+1], title=data["legend"])
-                matPlot.savefig("static/files/" + data["title"] + ".png")
+                matPlot.savefig("/home/alexholt54/mysite/static/files/" + data["title"] + ".png")
                 matPlot.close('all')
-                post = Posts(current_user.id, "static/files/" + data["title"] + ".png")
+                post = Posts(current_user.id,data["title"] + ".png")
                 db.session.add(post)
                 db.session.commit()
                 return "success"
-
 
 
 if __name__ == "__main__":

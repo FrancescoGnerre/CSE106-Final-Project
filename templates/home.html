@@ -22,15 +22,15 @@
                     <h3>Posts by other users:</h3>
                     {% for i in range(0,length) %}
                         <ul>
-                            <li> 
-                                <img src="{{uploadedPosts[i]}}" style="width:400px;height:400px;"><br>
+                            <li>
+                                <img src="https://alexholt54.pythonanywhere.com/static/files/{{uploadedPosts[i]}}" style="width:400px;height:400px;"><br>
                                 <label> Posted by: {{postUsers[i]}}</label>
                             </li>
                         </ul>
                     {% endfor %}
                 {% endif %}
             </div>
-            
+
         </div>
         <script src="../static/script.js"></script>
     </body>

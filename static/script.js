@@ -26,11 +26,11 @@ function consolePrint(x){
 // When user logs out
 function logOut() {
 	$.ajax({
-        url: "http://127.0.0.1:5000/logout",
+        url: "https://alexholt54.pythonanywhere.com/logout",
         type: "GET",
         success: function(response){
-            window.location.href = "http://127.0.0.1:5000/"
-        }, 
+            window.location.href = "https://alexholt54.pythonanywhere.com/"
+        },
         error: function(status, error){
             alert(error)
         }
@@ -39,20 +39,20 @@ function logOut() {
 
 // When user goes to registration page
 function toRegistration() {
-	window.location.href = "http://127.0.0.1:5000/registration";
+	window.location.href = "https://alexholt54.pythonanywhere.com/registration";
 }
 
 function toFilePage() {
-	window.location.href = "http://127.0.0.1:5000/files";
+	window.location.href = "https://alexholt54.pythonanywhere.com/files";
 }
 
 function toHomePage() {
-	window.location.href = "http://127.0.0.1:5000/home";
+	window.location.href = "https://alexholt54.pythonanywhere.com/home";
 }
 
 function toUserPage() {
     user = document.getElementById("username").value;
-    window.location.href = "http://127.0.0.1:5000/user/" + user;
+    window.location.href = "https://alexholt54.pythonanywhere.com/user/" + user;
 }
 
 // When user creates a new user
@@ -68,8 +68,8 @@ function registerUser() {
             contentType: "application/JSON",
             success: function(response){
                 alert("New Account Created! You can now log in!")
-                window.location.href = "http://127.0.0.1:5000/"
-            }, 
+                window.location.href = "https://alexholt54.pythonanywhere.com/"
+            },
             error: function(status, error){
                 alert(error)
             }
@@ -88,8 +88,8 @@ function logIn() {
             data: JSON.stringify({"username" : username, "password" : password}),
             contentType: "application/JSON",
             success: function(response){
-                window.location.href = "http://127.0.0.1:5000/" + response
-            }, 
+                window.location.href = "https://alexholt54.pythonanywhere.com/" + response
+            },
             error: function(status, error){
                 alert(error)
             }
@@ -100,6 +100,7 @@ function logIn() {
 function makePieGraph() {
     let title = $("#graphTitle").val();
     let row = $("#rowNumber").val();
+    alert(title + row)
     if (title !== "" && row !== "") {
         $.ajax({
             url: window.location.href,
@@ -107,7 +108,8 @@ function makePieGraph() {
             data: JSON.stringify({"title" : title, "row" : parseInt(row), "type" : "pie"}),
             contentType: "application/JSON",
             success: function(response){
-            }, 
+                alert("Graph Made!")
+            },
             error: function(status, error){
                 alert(error)
             }
@@ -128,7 +130,8 @@ function makeBarGraph() {
             data: JSON.stringify({"title" : title, "row" : parseInt(row), "xlabel" : xlabel, "ylabel" : ylabel, "type" : "bar"}),
             contentType: "application/JSON",
             success: function(response){
-            }, 
+                alert("Graph Made!")
+            },
             error: function(status, error){
                 alert(error)
             }
@@ -150,7 +153,8 @@ function makeLineGraph() {
             data: JSON.stringify({"title" : title, "legend" : legend, "numcols" : parseInt(numcols), "xlabel" : xlabel, "ylabel" : ylabel, "type" : "line"}),
             contentType: "application/JSON",
             success: function(response){
-            }, 
+                alert("Graph Made!")
+            },
             error: function(status, error){
                 alert(error)
             }
@@ -159,11 +163,11 @@ function makeLineGraph() {
 }
 
 function toAccount(){
-	window.location.href = "http://127.0.0.1:5000/user"
+	window.location.href = "https://alexholt54.pythonanywhere.com/user"
 }
 
 function backToFiles() {
-    window.location.href = "http://127.0.0.1:5000/files";
+    window.location.href = "https://alexholt54.pythonanywhere.com/files";
 }
 
 function uploadFile() {
@@ -178,11 +182,11 @@ function uploadFile() {
         cache: false,
 		success: function(response){
             alert("File Uploaded!")
-            window.location.href = "http://127.0.0.1:5000/files"
-		}, 
+            window.location.href = "https://alexholt54.pythonanywhere.com/files"
+		},
 		error: function(status, error){
             alert(error)
-            window.location.href = "http://127.0.0.1:5000/files"
+            window.location.href = "https://alexholt54.pythonanywhere.com/files"
 		}
 	});
 }
@@ -199,26 +203,3 @@ function updateFiles(i) {
     lastid+=1;
     list.appendChild(entry);
 }
-
-function removeFile(itemid, filename){
-    var item = document.getElementById(itemid);
-    list.removeChild(item);
-    console.log(filename)
-    // let name = filename
-    // $.ajax({
-    //     url: "http://127.0.0.1:5000/files",
-    //     type: "DELETE",
-    //     data: JSON.stringify({"name" : name,  "delete" : "user"}),
-    //     contentType: "application/JSON",
-    //     success: function(response){
-    //         alert("Successfully Deleted User!")
-    //         window.location.href = "http://127.0.0.1:5000/admin"
-    //     },
-    //     error: function(status, error){
-    //         alert(error)
-    //     }
-    //     });
-}
-$('.delete').on('click', function(){
-    $(this).parent().remove();
-  });
