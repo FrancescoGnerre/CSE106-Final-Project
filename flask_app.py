@@ -167,6 +167,8 @@ def viewFiles(filename):
         data = data.values
         if request.method == "GET":
             return render_template("viewFile.html", name=filename, columns=columns, data=data, length=len(columns), rows=rows)
+        if request.method == "POST":
+            return
 
 
 if __name__ == "__main__":

@@ -90,6 +90,22 @@ function logIn() {
 	}
 }
 
+function makePieGraph() {
+
+}
+
+function makeBarGraph() {
+    
+}
+
+function makeLineGraph() {
+    
+}
+
+function backToFiles() {
+    window.location.href = "http://127.0.0.1:5000/files";
+}
+
 function uploadFile() {
 	// Make call to server to upload file
 	let form_data = new FormData($("#upload-file")[0]);
