@@ -154,8 +154,7 @@ def files():
                     db.session.add(newFile)
                     db.session.commit()
                     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                    return render_template("editFile.html", uploadedFiles = uploadedFiles)
-    return render_template("editFile.html", uploadedFiles = uploadedFiles)
+                    return "success"
 
 if __name__ == "__main__":
     db.create_all()  # Only need this line if db not created
