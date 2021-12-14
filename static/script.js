@@ -102,6 +102,7 @@ function uploadFile() {
 		}, 
 		error: function(status, error){
             alert(error)
+            window.location.href = "http://127.0.0.1:5000/files"
 		}
 	});
 }

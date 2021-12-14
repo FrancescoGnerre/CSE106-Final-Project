@@ -9,14 +9,23 @@
         <div class="editFiles">
             <form method="POST" action="" id="upload-file" enctype="multipart/form-data">
                 <p><input type="file" id="csvFile" accept=".csv" name="file"></p>
-                <p><input type="submit" onclick="uploadFile()" value="Submit"></p>
             </form>
         </div>
+        <p><input type="submit" onclick="uploadFile()" value="Submit"></p>
         <div class='fileButtons'>
             <form>
                 <input type="button" value="Return" />
             </form>
         </div>
+        {% if uploadedFiles %}
+            <h3>Files you've uploaded</h3>
+            {% for file in uploadedFiles %}
+                <ul>
+                    <li>{{file}}</li>
+                </ul>
+            {% endfor %}
+        {% endif %}
+        <p><input type="button" onclick="logOut()" value="Log Out" /></p>
         <script src="../static/script.js"></script>
     </body>
 </html>
