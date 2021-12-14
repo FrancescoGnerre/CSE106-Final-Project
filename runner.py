@@ -33,6 +33,11 @@ db = SQLAlchemy(app)
 def load_user(user_id):
     return Users.query.filter_by(id=user_id).first()
 
+# Makes sure uploaded file is allowed
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 class Users(UserMixin, db.Model):
     __tablename__ = "Users"
@@ -58,9 +63,8 @@ class Users(UserMixin, db.Model):
 class Files(db.Model):
     __tablename__ = "Files"
     id = db.Column(db.Integer, primary_key=True)
-    location = db.Column(db.String, nullable=False)
     user_id = db.Column(db.Integer, nullable=False)
-    name = db.Column(db.String, nullable=False)
+    name = db.Column(db.String, nullable=False, unique=True)
     public = db.Column(db.Integer, nullable=False)
 
     def __init__(self, location, user_id, name, public):
@@ -132,19 +136,22 @@ def admin():
 @login_required
 def files():
     if request.method == "GET":
+        # Loads the page
         return render_template("editFile.html")
     elif request.method == "POST":
-        # FIXME to save file to static/files
-        return 0
-
-
+        # Uploads file to server and in the database
+        if 'file' in request.files:
+            file = request.files['file']
+            if file.filename != "":
+                if file and allowed_file(file.filename):
+                    filename = secure_filename(file.filename)
+                    newFile = Files(current_user.id, filename, 0)
+                    db.session.add(newFile)
+                    db.session.commit()
+                    file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                    return render_template("editFile.html")
+        return render_template("editFile.html")
 
 if __name__ == "__main__":
     db.create_all()  # Only need this line if db not created
     app.run(debug=True)
-
-
-# Makes sure uploaded file is allowed
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS

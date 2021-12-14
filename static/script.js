@@ -88,4 +88,21 @@ function logIn() {
 
 function uploadFile() {
 	// Make call to server to upload file
+	let form_data = new FormData($("#upload-file")[0]);
+	$.ajax({
+		url: window.location.href,
+		type: "POST",
+		data: form_data,
+		contentType: false,
+		processData: false,
+        cache: false,
+		success: function(response){
+            alert("File Uploaded!")
+            window.location.href = "http://127.0.0.1:5000/files"
+		}, 
+		error: function(status, error){
+            alert(error)
+			window.location.href = "http://127.0.0.1:5000/files"
+		}
+	});
 }
